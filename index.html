@@ -1,0 +1,583 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Cooper Fleishman Portfolio</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+  /* Layout: one column ledger. Hero, then rows separated by hairlines, each row a label column plus a content column. */
+  :root {
+    --bg: #F2F5F7;
+    --surface: #FFFFFF;
+    --fg: #121C26;
+    --muted: #54646F;
+    --line: #D5DDE3;
+    --accent: #2540D9;
+    --accent-ink: #FFFFFF;
+    --mark: rgba(255, 214, 61, 0.62);
+
+    --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+    --step--1: 0.8125rem;
+    --step-0: 1rem;
+    --step-1: 1.25rem;
+    --step-2: 1.75rem;
+    --step-3: clamp(2.7rem, 8.5vw, 5.4rem);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0E161E;
+      --surface: #151F2A;
+      --fg: #E6EDF3;
+      --muted: #9AA9B8;
+      --line: #263543;
+      --accent: #8EA2FF;
+      --accent-ink: #0E161E;
+      --mark: rgba(255, 214, 61, 0.26);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0E161E;
+    --surface: #151F2A;
+    --fg: #E6EDF3;
+    --muted: #9AA9B8;
+    --line: #263543;
+    --accent: #8EA2FF;
+    --accent-ink: #0E161E;
+    --mark: rgba(255, 214, 61, 0.26);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-body);
+    font-size: var(--step-0);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 3px;
+  }
+
+  mark {
+    background: linear-gradient(transparent 12%, var(--mark) 12%, var(--mark) 92%, transparent 92%);
+    color: inherit;
+    padding: 0 0.15em;
+    margin: 0 -0.05em;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  .wrap {
+    max-width: 68rem;
+    margin-inline: auto;
+    padding-block: 0;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+  }
+
+  /* Top bar */
+  .bar { padding-block: 1.25rem; }
+  .bar .wrap { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.75rem 1.5rem; }
+  .mono-mark {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .nav { display: flex; flex-wrap: wrap; gap: 0.25rem 1.5rem; }
+  .nav a {
+    font-size: 0.9375rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding-block: 0.25rem;
+  }
+  .nav a:hover { color: var(--fg); text-decoration: underline; text-underline-offset: 4px; }
+
+  /* Hero */
+  .hero { padding-block: clamp(2.5rem, 7vw, 5rem) clamp(2.5rem, 6vw, 4.5rem); }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0 0 1.25rem;
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-3);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.75rem;
+    text-wrap: balance;
+  }
+  .lead {
+    font-size: clamp(1.125rem, 2.4vw, 1.5rem);
+    line-height: 1.45;
+    max-width: 38rem;
+    margin: 0 0 2rem;
+    text-wrap: pretty;
+  }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 2rem; }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.75rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    text-decoration: none;
+    border: 1.5px solid var(--accent);
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .btn-primary { background: var(--accent); color: var(--accent-ink); }
+  .btn-primary:hover { filter: brightness(1.08); }
+  .btn-ghost { background: transparent; color: var(--accent); }
+  .btn-ghost:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+  .avail {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9375rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .avail::before {
+    content: "";
+    width: 0.55rem;
+    height: 0.55rem;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: none;
+  }
+
+  /* Sections */
+  section { border-top: 1px solid var(--line); }
+  .sec { display: grid; grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); gap: 1rem 2.5rem; padding-block: clamp(2rem, 5vw, 3.25rem); }
+  .sec-label {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 0;
+    padding-top: 0.45rem;
+  }
+  .sec-body { min-width: 0; }
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: var(--step-2);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.35rem;
+    text-wrap: balance;
+  }
+  .meta {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    color: var(--muted);
+    margin: 0 0 1.25rem;
+    letter-spacing: 0.02em;
+  }
+  .body-text { max-width: 40rem; margin: 0 0 1rem; text-wrap: pretty; }
+  ul.dots { list-style: none; margin: 0 0 1.25rem; padding: 0; max-width: 40rem; display: grid; gap: 0.6rem; }
+  ul.dots li { position: relative; padding-left: 1.25rem; text-wrap: pretty; }
+  ul.dots li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.7em;
+    width: 0.5rem;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+  .tags li {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    color: var(--muted);
+    background: var(--surface);
+  }
+
+  /* Project rows */
+  .project { padding-block: clamp(1.75rem, 4vw, 2.5rem); border-top: 1px solid var(--line); }
+  .project:first-of-type { border-top: 0; padding-top: 0; }
+  .project:last-of-type { padding-bottom: 0; }
+
+  /* Project images */
+  figure.shot { margin: 0 0 1.5rem; }
+  figure.shot img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--surface);
+  }
+  figure.shot figcaption {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+    margin-top: 0.6rem;
+  }
+  .project-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 14rem);
+    gap: 1.5rem 2.5rem;
+    align-items: start;
+  }
+  .split-text { min-width: 0; }
+  .project-split figure.shot { margin: 0; }
+  .shot-pair {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .shot-pair figure.shot { margin: 0; min-width: 0; }
+  .shot-pair figure.shot img { aspect-ratio: 4 / 3; object-fit: cover; }
+  .shot-pair figure.shot img.focus-left { object-position: left center; }
+
+  /* More work grid */
+  .more { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); gap: 1rem; }
+  .more article {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 1.25rem;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .more h3 {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .more .meta { margin: 0; }
+  .more p.desc { margin: 0 0 0.25rem; font-size: 0.9375rem; text-wrap: pretty; }
+  .more .tags { margin-top: auto; }
+
+  /* Skills */
+  dl.skills { margin: 0; display: grid; grid-template-columns: minmax(0, 7rem) minmax(0, 1fr); gap: 0.9rem 1.5rem; max-width: 42rem; }
+  dl.skills dt {
+    font-family: var(--font-mono);
+    font-size: var(--step--1);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding-top: 0.2rem;
+  }
+  dl.skills dd { margin: 0; }
+
+  .role { margin: 0 0 1.5rem; max-width: 40rem; }
+  .role:last-child { margin-bottom: 0; }
+  .role h3 { font-family: var(--font-display); font-size: var(--step-1); margin: 0; letter-spacing: -0.01em; }
+
+  /* Contact */
+  .email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1rem; margin: 0 0 1.25rem; }
+  .email {
+    font-family: var(--font-mono);
+    font-size: clamp(0.95rem, 2.6vw, 1.2rem);
+    overflow-wrap: anywhere;
+    user-select: all;
+  }
+  .copy-status { font-size: var(--step--1); color: var(--muted); min-height: 1.2em; }
+
+  footer { border-top: 1px solid var(--line); padding-block: 1.5rem 2rem; }
+  footer p { margin: 0; font-size: var(--step--1); color: var(--muted); font-family: var(--font-mono); letter-spacing: 0.02em; }
+
+  @media (max-width: 720px) {
+    .sec { grid-template-columns: minmax(0, 1fr); gap: 0.25rem; }
+    .sec-label { padding-top: 0; margin-bottom: 0.75rem; }
+    .project-split { grid-template-columns: minmax(0, 1fr); }
+    .project-split figure.shot { max-width: 14rem; }
+    dl.skills { grid-template-columns: minmax(0, 1fr); gap: 0.15rem; }
+    dl.skills dd { margin-bottom: 0.9rem; }
+  }
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="mono-mark" href="#top">C. Fleishman</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#more">More work</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap">
+      <p class="eyebrow">Game design + player research · RIT, Class of 2028</p>
+      <h1>Cooper Fleishman</h1>
+      <p class="lead">I'm a game design student at RIT. I research how players talk about the games they play, and I make levels, app prototypes and board games.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#projects">See projects</a>
+        <a class="btn btn-ghost" href="https://www.linkedin.com/in/cooper-fleishman/" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      <p class="avail">Seeking a user experience internship for Summer 2027</p>
+    </div>
+  </div>
+
+  <section id="research" aria-labelledby="research-h">
+    <div class="wrap sec">
+      <p class="sec-label">Research</p>
+      <div class="sec-body">
+        <h2 id="research-h">Pro-Social Research Fellow, Thriving in Games Group</h2>
+        <p class="meta">Virtual · September 2025 – Present</p>
+        <div class="shot-pair">
+          <figure class="shot">
+            <img class="focus-left" src="img/gdc-talk.jpg" width="1179" height="834" loading="lazy" alt="Cooper at a GDC Festival of Gaming podium beside a large screen showing the title slide of his talk, The Art of the Living Game, with Thriving in Games Group branding.">
+            <figcaption>Presenting at the GDC Festival of Gaming</figcaption>
+          </figure>
+          <figure class="shot">
+            <img src="img/gdc-sign.jpg" width="1200" height="900" loading="lazy" alt="Cooper standing in front of the large red GDC sign in the convention hall, wearing a conference badge.">
+            <figcaption>At GDC</figcaption>
+          </figure>
+        </div>
+        <ul class="dots">
+          <li>Presented “The Art of the Living Game,” on how Helldivers 2 designs for community ownership, to game industry professionals in a <mark>30 minute talk at the Game Developers Conference (GDC)</mark>.</li>
+          <li>Conduct qualitative and ethnographic research on prosocial behavior in Helldivers 2, focusing on in-game interactions and cooperative mechanics.</li>
+          <li>Analyze community forums and digital spaces to assess community health and player sentiment.</li>
+          <li>Ran a preliminary qualitative content analysis of player complaint discourse about matchmaking in Arc Raiders and other extraction shooters, to identify recurring player pain points.</li>
+          <li>Organize a prosocial game jam focused on designing for positive player interaction.</li>
+        </ul>
+        <ul class="tags" aria-label="Methods">
+          <li>Qualitative content analysis</li>
+          <li>Ethnographic research</li>
+          <li>Player sentiment analysis</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" aria-labelledby="projects-h">
+    <div class="wrap sec">
+      <p class="sec-label" id="projects-h">Selected projects</p>
+      <div class="sec-body">
+
+        <article class="project">
+          <h2>BattleBlock Theater Level</h2>
+          <p class="meta">Level design · Academic project · September – October 2026</p>
+          <figure class="shot">
+            <img src="img/battleblock.webp" width="1600" height="874" loading="lazy" alt="The finished BattleBlock Theater level: a large red and grey block structure with strawberries, spike traps, checkpoint flags and an exit at the top left.">
+            <figcaption>The finished level in BattleBlock Theater</figcaption>
+          </figure>
+          <p class="body-text">Designed and built a full level in BattleBlock Theater's in-game level editor, starting from a written level proposal.</p>
+          <ul class="dots">
+            <li>Ran <mark>3 playtest sessions</mark>, gathering feedback through observation and verbal critique.</li>
+            <li>Revised the level by closing off spaces so it fit BattleBlock's existing level language.</li>
+            <li>Filled unused corners with a hidden gem and an extra traversal path.</li>
+          </ul>
+          <ul class="tags"><li>Level design</li><li>Playtesting</li><li>Level proposal</li></ul>
+        </article>
+
+        <article class="project">
+          <h2>iMessage Conversation Tagging</h2>
+          <p class="meta">UX design · Academic project · March – May 2026</p>
+          <div class="project-split">
+          <div class="split-text">
+          <p class="body-text">A conversation tagging feature designed for Apple's iMessage design system.</p>
+          <ul class="dots">
+            <li>Created wireframes and user flows to map the experience from start to finish.</li>
+            <li>Prototyped the feature in Figma, including an on-screen keyboard so people can type custom names for their tags.</li>
+            <li>Gathered user feedback through observations and surveys.</li>
+          </ul>
+          <ul class="tags"><li>Wireframes</li><li>User flows</li><li>Figma prototype</li><li>Surveys</li></ul>
+          </div>
+          <figure class="shot">
+            <img src="img/imessage.png" width="400" height="792" loading="lazy" alt="Prototype of the iMessage Messages list on an iPhone, with four conversations and an unread filter. One conversation is marked unread with a blue dot.">
+            <figcaption>Messages list from the Figma prototype</figcaption>
+          </figure>
+          </div>
+        </article>
+
+        <article class="project">
+          <h2>Terrorize</h2>
+          <p class="meta">Game designer · Academic project · February – May 2026</p>
+          <figure class="shot">
+            <img src="img/terrorize.jpg" width="1600" height="1333" loading="lazy" alt="The Terrorize prototype laid out on a table: a box, a hexagonal map in the center, and five cardboard player screens with character sheets.">
+            <figcaption>The Terrorize prototype: box, hex map and player screens</figcaption>
+          </figure>
+          <p class="body-text">A social deduction board game for 3 to 6 players. I designed the core systems, wrote the rules and balanced the characters.</p>
+          <ul class="dots">
+            <li>Ran <mark>2 playtests with 6 players each</mark> to find pain points, and player understanding of the rules improved greatly between sessions.</li>
+            <li>Revised core systems, including how information is hidden between players, based on what the playtests showed.</li>
+            <li>Rewrote rulebook copy to resolve the pain points players hit.</li>
+          </ul>
+          <ul class="tags"><li>Board game design</li><li>Systems design</li><li>Playtesting</li><li>Rulebook writing</li></ul>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="more" aria-labelledby="more-h">
+    <div class="wrap sec">
+      <p class="sec-label" id="more-h">More work</p>
+      <div class="sec-body">
+        <div class="more">
+
+          <article>
+            <h3>Watch Your Point</h3>
+            <p class="meta">Personal project · Jun 2025 – Jan 2026</p>
+            <p class="desc">A multiplayer co-op rhythm game prototype in Unity, inspired by competitive rowing. I researched real rowing mechanics and translated them into timing, rhythm and cooperative play.</p>
+            <ul class="tags"><li>Unity</li><li>C#</li><li>Game design</li></ul>
+          </article>
+
+          <article>
+            <h3>Rowing Telemetry System</h3>
+            <p class="meta">Personal project · Started Jan 2026</p>
+            <p class="desc">An affordable, open source telemetry system built with other rowers. I prototype the microcontroller housing so it installs with little technical expertise, and the system can be adopted a step at a time.</p>
+            <ul class="tags"><li>Open source</li><li>Prototyping</li><li>Hardware housing</li></ul>
+          </article>
+
+          <article>
+            <h3>Don't Lose Your Head!</h3>
+            <p class="meta">Game jam · Lead programmer · Oct 2025</p>
+            <p class="desc">A 2D puzzle platformer made in Unity with 4 other developers on a tight deadline. I built level elements and hazards with C# events and wrote an input manager for Unity's new Input System.</p>
+            <ul class="tags"><li>Unity</li><li>C#</li><li>UI Toolkit</li></ul>
+          </article>
+
+          <article>
+            <h3>Pokemonle</h3>
+            <p class="meta">Academic project · Nov 2025</p>
+            <p class="desc">A Wordle-style Pokémon guessing game in HTML, CSS and vanilla JavaScript, with hot and cold indicators and live data pulled in through the Fetch API.</p>
+            <ul class="tags"><li>JavaScript</li><li>HTML</li><li>CSS</li><li>Fetch API</li></ul>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" aria-labelledby="skills-h">
+    <div class="wrap sec">
+      <p class="sec-label" id="skills-h">Skills</p>
+      <div class="sec-body">
+        <dl class="skills">
+          <dt>Research</dt>
+          <dd>Qualitative content analysis, ethnographic research, player sentiment analysis, surveys</dd>
+          <dt>Design</dt>
+          <dd>Wireframing, user flows, prototyping, playtesting</dd>
+          <dt>Languages</dt>
+          <dd>C#, JavaScript, HTML, CSS, Java, C++</dd>
+          <dt>Tools</dt>
+          <dd>Figma, GitHub, Unity, Visual Studio Code, Trello, Maya, Substance3D</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="bg-h">
+    <div class="wrap sec">
+      <p class="sec-label" id="bg-h">Background</p>
+      <div class="sec-body">
+        <div class="role">
+          <h3>Rochester Institute of Technology</h3>
+          <p class="meta">B.S. Game Design and Development · Expected May 2028</p>
+          <p class="body-text">College of Computing and Information Sciences. Presidential Scholarship recipient.</p>
+        </div>
+        <div class="role">
+          <h3>RIT Rowing</h3>
+          <p class="meta">Varsity · Rochester, NY</p>
+          <ul class="dots">
+            <li><strong>Recruit Chair</strong> (August 2026 – Present): contact prospective recruits, answer their questions about the team and RIT, and host them on campus and at practice.</li>
+            <li><strong>Social Media Chair</strong> (August 2025 – May 2026): managed the team's social media and won a promotional grant from USRowing to produce a video showcasing the team's culture and training.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" aria-labelledby="contact-h">
+    <div class="wrap sec">
+      <p class="sec-label" id="contact-h">Contact</p>
+      <div class="sec-body">
+        <h2>Available Summer 2027</h2>
+        <p class="body-text">I am looking for a user experience internship where qualitative research and game design meet. Write to me or find me on LinkedIn.</p>
+        <div class="email-row">
+          <span class="email" id="email-text">csfprogramming@gmail.com</span>
+          <button class="btn btn-ghost" type="button" id="copy-btn">Copy email</button>
+          <span class="copy-status" id="copy-status" role="status" aria-live="polite"></span>
+        </div>
+        <a class="btn btn-primary" href="https://www.linkedin.com/in/cooper-fleishman/" target="_blank" rel="noopener">Open LinkedIn</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Cooper Fleishman · Rochester, NY</p>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var btn = document.getElementById("copy-btn");
+    var status = document.getElementById("copy-status");
+    var emailEl = document.getElementById("email-text");
+    function selectEmail() {
+      try {
+        var range = document.createRange();
+        range.selectNodeContents(emailEl);
+        var sel = window.getSelection();
+        sel.removeAllRanges();
+        sel.addRange(range);
+      } catch (e) {}
+    }
+    btn.addEventListener("click", function () {
+      var text = emailEl.textContent.trim();
+      var done = function (msg) {
+        status.textContent = msg;
+        setTimeout(function () { status.textContent = ""; }, 2500);
+      };
+      try {
+        navigator.clipboard.writeText(text).then(
+          function () { done("Copied"); },
+          function () { selectEmail(); done("Selected. Press copy on your keyboard."); }
+        );
+      } catch (e) {
+        selectEmail();
+        done("Selected. Press copy on your keyboard.");
+      }
+    });
+  })();
+</script>
+
+</body></html>
